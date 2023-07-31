@@ -68,11 +68,22 @@ class TaskController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified task.
      */
-    public function update(Request $request, string $id)
+    public function update(TaskRequest $request, int $id)
     {
-        //
+        $validated = $request->validated();
+
+        $projectId = $validated['project_id'];
+
+        $task = Task::findOrFail($id);
+
+        $task->name = $validated['name'];
+
+        $task->save();
+
+        return redirect(route('projects.show', ['project' => $projectId]))
+                ->with('success', 'Task updated successfully');
     }
 
     /**
