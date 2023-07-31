@@ -11,45 +11,20 @@
         </div>
         
         <div class="row">
-            <div class="col-md-4 col-xl-3">
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <h5 class="card-title">A test project</h5>
-                        <p class="card-text">Available tasks: 0</p>
-                        <a href="#" class="btn btn-outline-primary">View Project</a>
+            @forelse ($projects as $project)
+                <div class="col-md-4 col-xl-3">
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $project->name }}</h5>
+                            <p class="card-text">Available tasks: 0</p>
+                            <a href="{{ route('projects.show', ['project' => $project->id]) }}" class="btn btn-outline-primary">View Project</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-4 col-xl-3">
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <h5 class="card-title">A test project</h5>
-                        <p class="card-text">Available tasks: 0</p>
-                        <a href="#" class="btn btn-outline-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-xl-3">
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <h5 class="card-title">A test project</h5>
-                        <p class="card-text">Available tasks: 0</p>
-                        <a href="#" class="btn btn-outline-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-xl-3">
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <h5 class="card-title">A test project</h5>
-                        <p class="card-text">Available tasks: 0</p>
-                        <a href="#" class="btn btn-outline-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
+            @empty
+            <p>No projects yet</p>
+            @endforelse
+           
         </div>
     </section>
 @endsection
