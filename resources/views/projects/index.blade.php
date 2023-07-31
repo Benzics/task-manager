@@ -6,7 +6,7 @@
     <section class="container">
         <div class="d-flex my-3">
             <h2>All Projects</h2>
-            <div style="margin-left: auto"><a href="#" class="btn btn-primary">New Project</a></div>
+            <aside class="ml-auto"><a href="{{ route('projects.create') }}" class="btn btn-primary">New Project</a></aside>
             
         </div>
         
