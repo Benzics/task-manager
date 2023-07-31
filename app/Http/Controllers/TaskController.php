@@ -83,6 +83,7 @@ class TaskController extends Controller
         $taskIds = $validated['taskIds'];
 
          // Loop through the taskIds and update the priorities accordingly
+        
         foreach ($taskIds as $index => $taskId) {
             $task = Task::find($taskId);
             if ($task) {
