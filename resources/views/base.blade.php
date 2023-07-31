@@ -43,7 +43,7 @@
       </main>
 
       <footer class="container my-4 p-3 text-center">
-        <span>&copy; 2023, All rights reserved, simple task manager by <a href="https://github.com/benzics">Benzics</a></span>
+        <span>&copy; 2023, All rights reserved, simple task manager by <a href="https://github.com/benzics/task-manager">Benzics</a></span>
       </footer>
       <!-- Bootstrap Bundle with Popper -->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

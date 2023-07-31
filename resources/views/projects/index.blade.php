@@ -16,7 +16,7 @@
                     <div class="card mb-2">
                         <div class="card-body">
                             <h5 class="card-title">{{ $project->name }}</h5>
-                            <p class="card-text">Available tasks: 0</p>
+                            <p class="card-text">Available tasks: {{ count($project->tasks) }}</p>
                             <a href="{{ route('projects.show', ['project' => $project->id]) }}" class="btn btn-outline-primary">View Project</a>
                         </div>
                     </div>
