@@ -2,29 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\TaskRequest;
 use App\Models\Project;
 use App\Models\Task;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -52,25 +38,9 @@ class TaskController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified task.
      */
-    public function update(TaskRequest $request, int $id)
+    public function update(TaskRequest $request, int $id): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -87,10 +57,40 @@ class TaskController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified task from project.
      */
-    public function destroy(string $id)
+    public function destroy(int $id): RedirectResponse
     {
-        //
+        $task = Task::findOrFail($id);
+
+        $projectId = $task->project->id;
+
+        $task->delete();
+
+        return redirect(route('projects.show', ['project' => $projectId]))
+                ->with('success', 'Task deleted successfully');
+    }
+
+    /**
+     * Reorder the task priority
+     */
+    public function reOrder(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'taskIds' => 'required'
+        ]);
+
+        $taskIds = $validated['taskIds'];
+
+         // Loop through the taskIds and update the priorities accordingly
+        foreach ($taskIds as $index => $taskId) {
+            $task = Task::find($taskId);
+            if ($task) {
+                $task->priority = $index + 1; 
+                $task->save();
+            }
+        }
+
+        return response()->json(['message' => 'Tasks reordered successfully.']);
     }
 }

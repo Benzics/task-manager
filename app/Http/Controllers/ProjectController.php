@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
+use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
 
 class ProjectController extends Controller
@@ -27,7 +27,7 @@ class ProjectController extends Controller
     {
         return view('projects.create');
     }
-
+    
     /**
      * Store a newly created project in database.
      */
@@ -51,31 +51,8 @@ class ProjectController extends Controller
     public function show(string $id): View
     {
         $project = Project::findOrFail($id);
+        $tasks = Task::where('project_id', $id)->orderBy('priority', 'ASC')->get();
 
-        return view('projects.show', compact('project'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('projects.show', compact('project', 'tasks'));
     }
 }

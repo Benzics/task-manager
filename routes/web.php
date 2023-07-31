@@ -16,5 +16,6 @@ use App\Http\Controllers\TaskController;
 */
 
 Route::get('/', [ProjectController::class, 'index']);
-Route::resource('projects', ProjectController::class);
-Route::resource('tasks', TaskController::class);
+Route::resource('projects', ProjectController::class)->only(['index','show', 'create', 'store']);
+Route::resource('tasks', TaskController::class)->only(['store', 'update', 'destroy']);
+Route::post('/tasks/reorder', [TaskController::class, 'reOrder'])->name('tasks.reorder');
