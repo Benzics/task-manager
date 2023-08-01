@@ -19,4 +19,17 @@ class Project extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+        
+        self::deleting(function($project)
+        {
+            $project->tasks()->each(function($task)
+            {
+                $task->delete();
+            });
+        });
+    }
 }

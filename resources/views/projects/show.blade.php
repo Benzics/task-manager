@@ -13,9 +13,14 @@
     <div class="d-flex mb-4">
         <div class="ml-auto">
             <a href="{{ route('projects.edit', ['project' => $project->id]) }}" class="btn btn-success">Edit Project</a>
-            <a href="#" class="btn btn-danger">Delete Project</a>
+            <form action="{{ route('projects.destroy', ['project' => $project->id]) }}" style="display: inline" method="post" onsubmit="return confirm('Are you sure you want to delete this project and all associated tasks')">
+                @method('delete')
+                @csrf
+                <button class="btn btn-danger" type="submit">Delete Project</button>
+            </form>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-6">
             <h3 class="mb-4">Tasks</h3>

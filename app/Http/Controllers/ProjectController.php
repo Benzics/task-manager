@@ -82,4 +82,17 @@ class ProjectController extends Controller
 
         return view('projects.show', compact('project', 'tasks'));
     }
+
+    /**
+     * Delete a project and all associated tasks
+     */
+    public function destroy(int $id): RedirectResponse
+    {
+        $project = Project::findOrFail($id);
+
+        $project->delete();
+
+        return redirect(route('projects.index'))->with('success', 'Project Deleted Successfully');
+    }
+
 }
