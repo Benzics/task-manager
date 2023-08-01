@@ -5,12 +5,14 @@ Built with Laravel 10
 ### Requirements
 - PHP 8.1 and above
 - MySQL database
+- Composer
 
 ### Installation
 - Rename the .env.example file to .env
 - Edit the DB_DATABASE, DB_USERNAME and DB_PASSWORD fields to your mysql database credentials in the .env file
 - Open a console at the root dir, and run these commands consecutively
   ```
+  composer install
   php artisan migrate
   php artisan serve
   ```
