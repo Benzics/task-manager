@@ -27,7 +27,7 @@ class ProjectController extends Controller
     {
         return view('projects.create');
     }
-    
+
     /**
      * Store a newly created project in database.
      */
@@ -43,6 +43,33 @@ class ProjectController extends Controller
         $project->save();
 
         return redirect(route('projects.index'))->with('success', 'Project created successfully');
+    }
+
+    /**
+     * Display the form for editing the project
+     */
+    public function edit(int $id): View
+    {
+        $project = Project::findOrFail($id);
+
+        return view('projects.edit', compact('project'));
+    }
+
+    /**
+     * Store a newly created project in database.
+     */
+    public function update(ProjectRequest $request, int $id): RedirectResponse
+    {
+        // We get our validated project name and save it
+        $validated = $request->validated();
+
+        $project = Project::findOrFail($id);
+
+        $project->name = $validated['name'];
+
+        $project->save();
+
+        return redirect(route('projects.show', ['project' => $project->id]))->with('success', 'Project updated successfully');
     }
 
     /**

@@ -8,7 +8,14 @@
     li {cursor: move;}
 </style>
 <section class="container">
-    <h1 class="text-center mb-5">{{ $project->name }}</h1>
+    <h1 class="text-center mb-3">{{ $project->name }}</h1>
+
+    <div class="d-flex mb-4">
+        <div class="ml-auto">
+            <a href="{{ route('projects.edit', ['project' => $project->id]) }}" class="btn btn-success">Edit Project</a>
+            <a href="#" class="btn btn-danger">Delete Project</a>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-6">
             <h3 class="mb-4">Tasks</h3>
